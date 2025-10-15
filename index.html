@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub - Tienda de Tecnología</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            padding: 12px 25px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #ff5252;
+        }
+
+        .icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* NAVEGACIÓN */
+        nav {
+            background: white;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+        }
+
+        .nav-item {
+            padding: 15px 0;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CATEGORÍAS */
+        .categories {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .categories h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .category-info {
+            padding: 20px;
+        }
+
+        .category-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .category-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .category-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .category-link:hover {
+            color: #764ba2;
+        }
+
+        /* PRODUCTOS */
+        .products {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .products h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            position: relative;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .product-rating {
+            color: #ffc107;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .original-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 20px;
+            text-align: center;
+            color: #aaa;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-bar {
+                order: 3;
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .categories h2, .products h2 {
+                font-size: 24px;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .nav-container {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 0 10px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .icons {
+                gap: 10px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">⚡ raquesaa</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar productos...">
+                <button>Buscar</button>
+            </div>
+            <div class="icons">
+                <button class="icon-btn">❤️</button>
+                <button class="icon-btn">
+                    🛒
+                    <span class="badge">3</span>
+                </button>
+                <button class="icon-btn">👤</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-item">Inicio</a>
+            <a href="#" class="nav-item">Laptops</a>
+            <a href="#" class="nav-item">Smartphones</a>
+            <a href="#" class="nav-item">Accesorios</a>
+            <a href="#" class="nav-item">Ofertas</a>
+            <a href="#" class="nav-item">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>¡Bienvenido a TechHub!</h1>
+        <p>Encuentra los mejores productos de tecnología con precios increíbles</p>
+        <button class="hero-btn">Comprar Ahora</button>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section class="categories">
+        <h2>Categorías Populares</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-img">💻</div>
+                <div class="category-info">
+                    <h3>Laptops</h3>
+                    <p>Potentes equipos para trabajo y gaming</p>
+                    <a href="#" class="category-link">Explorar →</a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-img">📱</div>
+                <div class="category-info">
+                    <h3>Smartphones</h3>
+                    <p>Los últimos modelos disponibles</p>
+                    <a href="#" class="category-link">Explorar →</a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-img">⌚</div>
+                <div class="category-info">
+                    <h3>Smartwatches</h3>
+                    <p>Mantente conectado siempre</p>
+                    <a href="#" class="category-link">Explorar →</a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-img">🎧</div>
+                <div class="category-info">
+                    <h3>Audífonos</h3>
+                    <p>Sonido de calidad premium</p>
+                    <a href="#" class="category-link">Explorar →</a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-img">📷</div>
+                <div class="category-info">
+                    <h3>Cámaras</h3>
+                    <p>Captura cada momento con detalle</p>
+                    <a href="#" class="category-link">Explorar →</a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-img">🖥️</div>
+                <div class="category-info">
+                    <h3>Accesorios</h3>
+                    <p>Todo lo que necesitas</p>
+                    <a href="#" class="category-link">Explorar →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <section class="products">
+        <h2>Productos en Oferta</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-img">
+                    💻
+                    <span class="discount-badge">-30%</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Laptop Pro 15"</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (128)</div>
+                    <div class="product-price">
+                        <span class="price">$799</span>
+                        <span class="original-price">$1,199</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    📱
+                    <span class="discount-badge">-20%</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Smartphone X13</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (256)</div>
+                    <div class="product-price">
+                        <span class="price">$599</span>
+                        <span class="original-price">$749</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    🎧
+                    <span class="discount-badge">-25%</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Audífonos Elite</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (89)</div>
+                    <div class="product-price">
+                        <span class="price">$149</span>
+                        <span class="original-price">$199</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    ⌚
+                    <span class="discount-badge">-15%</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Smart Watch Pro</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (342)</div>
+                    <div class="product-price">
+                        <span class="price">$249</span>
+                        <span class="original-price">$299</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    📷
+                    <span class="discount-badge">-35%</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Cámara Ultra 4K</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (167)</div>
+                    <div class="product-price">
+                        <span class="price">$899</span>
+                        <span class="original-price">$1,399</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    🖱️
+                    <span class="discount-badge">-10%</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Mouse Gamer RGB</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (203)</div>
+                    <div class="product-price">
+                        <span class="price">$59</span>
+                        <span class="original-price">$69</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    ⌨️
+                    <span class="discount-badge">-20%</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Teclado Mecánico</div>
+                    <div class="product-rating">⭐⭐⭐⭐⭐ (421)</div>
+                    <div class="product-price">
+                        <span class="price">$119</span>
+                        <span class="original-price">$149</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    🔋
+                    <span class="discount-badge">-15%</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Power Bank 65W</div>
+                    <div class="product-rating">⭐⭐⭐⭐ (156)</div>
+                    <div class="product-price">
+                        <span class="price">$89</span>
+                        <span class="original-price">$109</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Sobre TechHub</h4>
+                <ul>
+                    <li><a href="#">Acerca de nosotros</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Carrera</a></li>
+                    <li><a href="#">Prensa</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Ayuda y Soporte</h4>
+                <ul>
+                    <li><a href="#">Centro de ayuda</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Estado del pedido</a></li>
+                    <li><a href="#">Cambios y devoluciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Políticas</h4>
+                <ul>
+                    <li><a href="#">Términos de servicio</a></li>
+                    <li><a href="#">Privacidad</a></li>
+                    <li><a href="#">Cookies</a></li>
+                    <li><a href="#">Seguridad</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Síguenos</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 TechHub. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
